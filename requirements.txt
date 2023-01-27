@@ -6,8 +6,8 @@ opencv-python-headless
 Pillow
 pydantic
 requests
-scikit_image==0.18.3
-scipy==1.7.1
+scikit_image
+scipy
 stqdm
 torch
 torchvision
