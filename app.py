@@ -98,7 +98,7 @@ app.add_middleware(
   allow_headers=["*"]
 )
 
-@app.post("/file")
+@app.post("/api/file")
 async def from_file(file_item: FileItem):
   byte_data = base64.b64decode(file_item.file)
   img_input = PIL.Image.open(BytesIO(byte_data)).convert("RGB")
