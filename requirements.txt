@@ -1,5 +1,6 @@
 fastai
 fastapi
+httpx
 matplotlib
 numpy
 opencv-python-headless
