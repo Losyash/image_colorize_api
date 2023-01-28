@@ -1,8 +1,5 @@
-import os, re, time
-import PIL
-import cv2
+import os, PIL, cv2, base64
 import numpy as np
-import base64
 
 from datetime import datetime
 from io import BytesIO
@@ -35,7 +32,6 @@ def load_model(model_dir, option):
 
   return colorizer
 
-
 def resize_img(input_img, max_size):
   img = input_img.copy()
   img_height, img_width = img.shape[0],img.shape[1]
@@ -55,8 +51,7 @@ def resize_img(input_img, max_size):
 
   return img
 
-
-def colorize_image(pil_image, img_size=800) -> "PIL.Image":
+def colorize_image(pil_image, img_size=800):
   pil_img = pil_image.convert("RGB")
   img_rgb = np.array(pil_img)
   resized_img_rgb = resize_img(img_rgb, img_size)
@@ -66,11 +61,8 @@ def colorize_image(pil_image, img_size=800) -> "PIL.Image":
 
   return output_pil_img
 
-import os, re, time
-
 os.environ["TORCH_HOME"] = os.path.join(os.getcwd(), ".cache")
 os.environ["XDG_CACHE_HOME"] = os.path.join(os.getcwd(), ".cache")
-
 
 device.set(device=DeviceId.CPU)
 
