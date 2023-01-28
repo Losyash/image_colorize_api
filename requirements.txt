@@ -1,4 +1,4 @@
-fastai
+fastai @ https://github.com/fastai/fastai1/archive/master.zip
 fastapi
 httpx
 matplotlib
