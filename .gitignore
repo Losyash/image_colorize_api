@@ -2,6 +2,5 @@
 /.cache
 /.conda
 /models
-/assets
 /output
 /.pytest_cache
