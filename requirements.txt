@@ -8,8 +8,11 @@ Pillow
 pydantic
 requests
 scikit_image
+scikit-image
 scipy
 stqdm
 torch
 torchvision
 uvicorn
+scikit-image
+opencv-python
