@@ -12,7 +12,7 @@ from pydantic import BaseModel
 
 from src.deoldify import device
 from src.deoldify.device_id import DeviceId
-from src.deoldify.visualize import get_image_colorizer
+from src.deoldify.visualize import *
 from src.app_utils import get_model_bin
 
 os.environ["TORCH_HOME"] = os.path.join(os.getcwd(), ".cache")
