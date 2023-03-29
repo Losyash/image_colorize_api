@@ -14,19 +14,19 @@ def compress_image(image, path_original):
     width = 1920
     height = 1080
 
-    name = os.path.basename(path_original).split('.')
-    first_name = os.path.join(os.path.dirname(path_original), name[0] + '.jpg')
+    name = os.path.basename(path_original).split(".")
+    first_name = os.path.join(os.path.dirname(path_original), name[0] + ".jpg")
 
     if image.size[0] > width and image.size[1] > height:
         image.thumbnail(size, Image.ANTIALIAS)
         image.save(first_name, quality=85)
     elif image.size[0] > width:
-        wpercent = (width / float(image.size[0]))
+        wpercent = width / float(image.size[0])
         height = int((float(image.size[1]) * float(wpercent)))
         image = image.resize((width, height), Image.ANTIALIAS)
         image.save(first_name, quality=85)
     elif image.size[1] > height:
-        wpercent = (height / float(image.size[1]))
+        wpercent = height / float(image.size[1])
         width = int((float(image.size[0]) * float(wpercent)))
         image = image.resize((width, height), Image.ANTIALIAS)
         image.save(first_name, quality=85)
@@ -38,7 +38,7 @@ def convertToJPG(path_original):
     img = Image.open(path_original)
 
     if img.format == "JPEG":
-        image = img.convert('RGB')
+        image = img.convert("RGB")
         compress_image(image, path_original)
         img.close()
 
@@ -55,13 +55,13 @@ def convertToJPG(path_original):
             image.paste(img, img)
             compress_image(image, path_original)
         except ValueError:
-            image = img.convert('RGB')
+            image = img.convert("RGB")
             compress_image(image, path_original)
 
         img.close()
 
     elif img.format == "BMP":
-        image = img.convert('RGB')
+        image = img.convert("RGB")
         compress_image(image, path_original)
         img.close()
 
@@ -79,7 +79,7 @@ def blur(image, x0, x1, y0, y1, sigma=1, multichannel=True):
 
 def download(url, filename):
     data = requests.get(url).content
-    with open(filename, 'wb') as handler:
+    with open(filename, "wb") as handler:
         handler.write(data)
 
     return filename

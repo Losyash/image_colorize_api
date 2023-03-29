@@ -11,6 +11,6 @@ def test_read_summarize_none_body():
 
 
 def test_read_summarize_none_text():
-    response = client.post('/api/file', json={'file': None})
+    response = client.post("/api/file", json={"file": None})
 
     assert response.status_code == 422
