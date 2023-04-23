@@ -3,6 +3,7 @@ import PIL
 import cv2
 import base64
 import numpy as np
+import urllib
 
 from io import BytesIO
 
@@ -13,12 +14,25 @@ from pydantic import BaseModel
 from src.deoldify import device
 from src.deoldify.device_id import DeviceId
 from src.deoldify.visualize import *
-from app_utils import get_model_bin
 
 os.environ["TORCH_HOME"] = os.path.join(os.getcwd(), ".cache")
 os.environ["XDG_CACHE_HOME"] = os.path.join(os.getcwd(), ".cache")
 
 device.set(device=DeviceId.CPU)
+
+
+def get_model_bin(url, output_path):
+    # print('Getting model dir: ', output_path)
+    if not os.path.exists(output_path):
+        create_directory(output_path)
+
+        urllib.request.urlretrieve(url, output_path)
+
+        # cmd = "wget -O %s %s" % (output_path, url)
+        # print(cmd)
+        # os.system(cmd)
+
+    return output_path
 
 
 def load_model(model_dir, option):
