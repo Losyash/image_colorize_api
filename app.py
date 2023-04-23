@@ -22,20 +22,17 @@ device.set(device=DeviceId.CPU)
 
 
 def get_model_bin(url, output_path):
-    # print('Getting model dir: ', output_path)
+    """Load model form file"""
     if not os.path.exists(output_path):
         create_directory(output_path)
-
         urllib.request.urlretrieve(url, output_path)
-
-        # cmd = "wget -O %s %s" % (output_path, url)
-        # print(cmd)
-        # os.system(cmd)
 
     return output_path
 
 
 def load_model(model_dir, option):
+    """Load model form file"""
+
     if option.lower() == "artistic":
         model_url = "https://data.deepai.org/deoldify/ColorizeArtistic_gen.pth"
         get_model_bin(model_url, os.path.join(model_dir, "ColorizeArtistic_gen.pth"))
@@ -51,6 +48,8 @@ def load_model(model_dir, option):
 
 
 def resize_img(input_img, max_size):
+    """Resize input image"""
+
     img = input_img.copy()
     img_height, img_width = img.shape[0], img.shape[1]
 
@@ -71,6 +70,8 @@ def resize_img(input_img, max_size):
 
 
 def colorize_image(pil_image, img_size=800):
+    """Coorize input image"""
+
     pil_img = pil_image.convert("RGB")
     img_rgb = np.array(pil_img)
     resized_img_rgb = resize_img(img_rgb, img_size)
@@ -82,15 +83,6 @@ def colorize_image(pil_image, img_size=800):
     return output_pil_img
 
 
-os.environ["TORCH_HOME"] = os.path.join(os.getcwd(), ".cache")
-os.environ["XDG_CACHE_HOME"] = os.path.join(os.getcwd(), ".cache")
-
-device.set(device=DeviceId.CPU)
-
-st_color_option = "Artistic"
-colorizer = load_model("models/", st_color_option)
-
-
 class FileItem(BaseModel):
     file: str
 
@@ -98,6 +90,14 @@ class FileItem(BaseModel):
 class LinkItem(BaseModel):
     link: str
 
+
+os.environ["TORCH_HOME"] = os.path.join(os.getcwd(), ".cache")
+os.environ["XDG_CACHE_HOME"] = os.path.join(os.getcwd(), ".cache")
+
+device.set(device=DeviceId.CPU)
+
+st_color_option = "Artistic"
+colorizer = load_model("models/", st_color_option)
 
 app = FastAPI()
 
